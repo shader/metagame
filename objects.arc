@@ -17,14 +17,16 @@
                           nil
                           (+ "/" o!type "s")))
        (ensure-dir d)
-       (save-table o (+ d "/" o!name)))))
+       (save-table o (+ d "/" o!id)))))
 
 (def load-objects ()
   "Load all objects from their respective directories"
   (ensure-dir "objects")
   (each d (dir "objects")
-    (if file?.d (temload 'object d)
-        dir?.d (each f dir.d
-                 (temload (sym:trim d 'end #\s)
-                          (+ "objects/" d + "/" f))))))
-
+    (let path (+ "objects/" d)
+      (if file?.path (let o (temload 'object path)
+                       (= (objects* o!id) o))
+          dir?.path (each f dir.path
+                      (let o (temload (sym:trim path 'end #\s)
+                                      (+ "objects/" path + "/" f))
+                        (= (objects* o!id) o)))))))
