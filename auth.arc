@@ -11,10 +11,11 @@
 ; creates a new user object that contains the username. Passwords
 ; and other related information should be added later.
 (def add-user (name)
-  (let u (inst 'user 'name name)
-    (= (users* u!id) u)
-    (= (object* u!id) u)
-    u!id))
+  (if (find-user name) (prn "User exists...")
+      (let u (inst 'user 'name name)
+	(= (users* u!id) u)
+	(= (object* u!id) u)
+	u!id)))
 
 ; set-pw
 ; sets password for specific user
@@ -35,4 +36,11 @@
 ; gets the id based off of the user name
 ; NOTE:  Slow more than 5-10k users
 (def user-id (name)
-  ((find [is _!name name] vals.users*) 'id))
+  (let u (find-user name)
+    u!id))
+
+; find-username
+; returns the object entry from the user table
+; NOTE:  Slow
+(def find-user (name)
+  (find [is _!name name] vals.users*))
