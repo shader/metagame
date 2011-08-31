@@ -5,7 +5,7 @@
 ; registration, using the new object framework.
 (= users* (table))
 
-(deftem (user objects) pw nil type 'user)
+(deftem (user object) pw nil type 'user)
 
 ; add-user
 ; creates a new user object that contains the username. Passwords
@@ -13,14 +13,13 @@
 (def add-user (name)
   (let u (inst 'user 'name name)
     (= (users* u!id) u)
-    (= (objects* u!id) u)
+    (= (object* u!id) u)
     u!id))
 
 ; set-pw
 ; sets password for specific user
 (def set-pw (id pass)
-  (= users*.id!pw pass)
-  (= objects*.id!pw pass))
+  (= users*.id!pw pass))
 
 ; register
 ; Function that straps everything together into one
