@@ -14,24 +14,14 @@
 			(tag (script src "web-interface.js" type "text/javascript")))
 			(tag (script type "text/javascript")
 				(pr "var mg = new metagame();")
-				(pr "mg.login(\"test\",\"test\");"))
+				(pr "var resp = mg.login(\"test\",\"test\");")
+				(pr "alert(resp);"))
 		(tag (body)
 			(if (req 'cooks) (pr (req 'cooks))
 				(pr "no cookies"))))))
 
-; Web API function to login
-(defop web-login req
-	(let id (login (alref (req 'args) "username") (alref (req 'args) "password"))
-		(if id (prn "Login Success")
-			(prn "Login Failed"))))
 
-; 
-(defop web-register req
-	(let id (register (alref (req 'args) "username") (alref (req 'args) "password"))
-		(if id (prn "Register Success")
-			(prn "Register Failed"))))
-
-
+; Various HTML printing functions
 
 ; prints doctype for HTML5
 (def doctype ()

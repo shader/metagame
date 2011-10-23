@@ -15,9 +15,11 @@ function metagame() {
 	/* Login function, handles making the call to login
 	 */
 	this.login = function(usr, pwd) {
+		var response = ""
 		$.get("web-login",{username: usr, password: pwd},function(data){
-			alert(data)
+			response = data
 		})
+		return response
 	}
 
 }
