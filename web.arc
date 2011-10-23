@@ -12,9 +12,12 @@
 		(tag (head)
 			(tag (script src "jquery-1.6.4.min.js" type "text/javascript"))
 			(tag (script src "web-interface.js" type "text/javascript")))
+			(tag (script type "text/javascript")
+				(pr "var mg = new metagame();")
+				(pr "mg.login(\"test\",\"test\");"))
 		(tag (body)
-			(if (req 'cooks) nil (pr "no cookies")
-				(req 'cooks))))))
+			(if (req 'cooks) (pr (req 'cooks))
+				(pr "no cookies"))))))
 
 ; Web API function to login
 (defop web-login req
