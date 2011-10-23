@@ -16,6 +16,17 @@
 			(if (req 'cooks) nil (pr "no cookies")
 				(req 'cooks))))))
 
+; Web API function to login
+(defop web-login req
+	(let id (login (alref (req 'args) "username") (alref (req 'args) "password"))
+		(if id (prn "Login Success")
+			(prn "Login Failed"))))
+
+; 
+(defop web-register req
+	(let id (register (alref (req 'args) "username") (alref (req 'args) "password"))
+		(if id (prn "Register Success")
+			(prn "Register Failed"))))
 
 
 

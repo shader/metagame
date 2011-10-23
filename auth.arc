@@ -14,13 +14,14 @@
   (if (find-user name) (prn "User exists...")
       (let u (inst 'user 'name name)
 	(= (users* u!id) u)
-	(= (object* u!id) u)
+	(= (objects* u!id) u)
 	u!id)))
 
 ; set-pw
 ; sets password for specific user
 (def set-pw (id pass)
-  (= users*.id!pw pass))
+  (= users*.id!pw pass)
+  (= objects*.id!pw pass))
 
 ; register
 ; Function that straps everything together into one
@@ -31,6 +32,18 @@
   (let id (add-user name)
     (set-pw id pass)
     id))
+
+; login
+; Function that will return a session id upon successfully
+; providing a valid username and password. Otherwise,
+; return nil
+; NOTE: Currently returns user ID
+(def login (name pass)
+  (let u (find-user name)
+    (if u 
+      (if (is u!pw pass) u!id
+        nil)
+      nil)))
 
 ; user-id
 ; gets the id based off of the user name
