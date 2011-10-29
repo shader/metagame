@@ -1,10 +1,3 @@
-/* Web Interface
- *
- * Simple web interface to demonstrate how various game elements work
- * such as login, registration, session ID's, ownership, among other
- * things.
- */
-
 function metagame() {
 
 	var userInfo = {
@@ -41,9 +34,6 @@ function metagame() {
 				console.log("Error when calling login function")
 			}
 		})
-	}
-
-	this.API_login = function() {
 	}
 
 	this.register = function() {
