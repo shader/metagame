@@ -10,9 +10,18 @@ function metagame() {
 
 	// Init function
 	this.init = function() {
-		userInfo.username = "test"
-		userInfo.password = "test"
-		
+		if(!isLoggedIn) {
+			this.showLogin()
+		}
+	}
+
+	this.setUserInfo = function(name,pass) {
+		userInfo.username = name
+		userInfo.password = pass
+	}
+
+	this.alertUserInfo = function() {
+		alert(userInfo.username + " " + userInfo.password)
 	}
 
 	this.showLogin = function() {
