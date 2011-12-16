@@ -7,23 +7,21 @@
 ; 
 ; Later it will display player-relavent data such owned objects
 (defop || req 
-	(doctype)
-	(prn (tag (html)
-		(tag (head)
-			(tag (script src "jquery-1.6.4.min.js" type "text/javascript"))
-			(tag (script src "web-interface.js" type "text/javascript")))
-			(tag (script type "text/javascript")
-				(pr "var mg = new metagame();")
-				(pr "var resp = mg.login(\"test\",\"test\");")
-				(pr "alert(resp);"))
-		(tag (body)
-			(if (req 'cooks) (pr (req 'cooks))
-				(pr "no cookies"))))))
+  (doctype)
+  (tag (html)
+    (tag (head)
+      (add-js "jquery-1.6.4.min.js")
+      (add-js "web-interface.js")
+    (tag (body)
+      (if (req 'cooks) (pr (req 'cooks))
+         (pr "no cookies"))))))
 
 
 ; Various HTML printing functions
 
 ; prints doctype for HTML5
 (def doctype ()
-	(prn "<!DOCTYPE HTML>"))
+  (pr "<!DOCTYPE HTML>"))
 
+(def add-js (filename) 
+  (tag (script src filename type "text/javascript")))
