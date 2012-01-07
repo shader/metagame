@@ -10,11 +10,26 @@
   (doctype)
   (tag (html)
     (tag (head)
-      (add-js "jquery-1.6.4.min.js")
-      (add-js "web-interface.js")
+      (add-js "jquery.js")
+      (add-js "knockout.js")
+      (add-js "metagame.js"))
     (tag (body)
-      (if (req 'cooks) (pr (req 'cooks))
-         (pr "no cookies"))))))
+      (tag (div)
+        (login-prompt))
+      (tag (div)
+        (if (req 'cooks) (pr (req 'cooks))
+          (pr "no cookies")))
+      (tag (p)))))
+
+(defop register req
+  (doctype)
+  (tag (html)
+    (tag (head)
+      (add-js "jquery.js")
+      (add-js "knockout.js")
+      (add-js "metagame.js"))
+    (tag (body)
+      (pr "Register here... not yet though..."))))
 
 
 ; Various HTML printing functions
@@ -25,3 +40,10 @@
 
 (def add-js (filename) 
   (tag (script src filename type "text/javascript")))
+
+(def login-prompt ()
+  (pr "<input type=\"text\" id=\"login_username\" />")
+  (pr "<input type=\"password\" id=\"login_password\" />")
+  (pr "<button id=\"login_button\">Login</button>")
+  (nbsp)
+  (link "Register" "register"))

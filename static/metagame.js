@@ -1,46 +1,64 @@
 var userInfo = {
-  "username": "",
-  "password": "",
-  "sessionID": ""
+  username: "",
+  password: "",
 }
 
-var isLoggedIn = false
+$(document).ready( function () {
+  getUsers();
+});
 
-function alertUserInfo () {
-  alert(userInfo.username + " " + userInfo.password)
-}
+$('#login_button').live("click", function () {
+  console.log("clicked login button");
+  
+  userInfo.username = $('#login_username').val();
+  userInfo.password = $('#login_password').val();
+  
+  login(userInfo.username,userInfo.password);
+});
 
-function showLogin () {
-  $('#login_prompt').slideDown('slow')
-}
-
-/* Login function, handles making the call to login
- */
-this.login = function() {
+function login (username, password) {
   $.ajax({
-    url: "web-login",
     type: "GET",
-    data: {username: userInfo.username, password: userInfo.password},
-    success: function(data) {
-      console.log("Successful login call")
+    url: "http://127.0.0.1:8080/api-login",
+    data: {
+      username: username,
+      password: password
     },
-    error: function() {
-      console.log("Error when calling login function")
+    success: function(data) {
+      alert("successful attempt\n"+data);
+    },
+    error: function () {
+      alert("error");
     }
-  })
+  });
 }
 
-function register () {
+function register (username, password) {
   $.ajax({
-    url: "web-register",
     type: "POST",
-    data: {username: userInfo.username, password: userInfo.password},
-    success: function(data) {
-      console.log("Successful register call")
-      alert(data)
+    url: "http://127.0.0.1:8080/api-login",
+    data: {
+      username: username,
+      password: password
     },
-    error: function() {
-      console.log("Error when calling register function")
+    success: function(data) {
+      alert("successful attempt\n"+data);
+    },
+    error: function () {
+      alert("error");
     }
-  })
+  });
+}
+
+function getUsers () {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:8080/api-admin-getUsers",
+    success: function(data) {
+      alert("list: "+data);
+    },
+    error: function () {
+      alert("error");
+    }
+  });
 }
