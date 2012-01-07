@@ -6,7 +6,9 @@
 ; Define a main page. If there is no login cookie, pop out a login prompt,
 ; 
 ; Later it will display player-relavent data such owned objects
-(defop || req 
+(defopr || req "main")
+
+(defop main req
   (doctype)
   (tag (html)
     (tag (head)
@@ -29,7 +31,8 @@
       (add-js "knockout.js")
       (add-js "metagame.js"))
     (tag (body)
-      (pr "Register here... not yet though..."))))
+      (tag (div)
+        (register-prompt)))))
 
 
 ; Various HTML printing functions
@@ -47,3 +50,8 @@
   (pr "<button id=\"login_button\">Login</button>")
   (nbsp)
   (link "Register" "register"))
+
+(def register-prompt ()
+  (pr "<input type=\"text\" id=\"register_username\" />")
+  (pr "<input type=\"password\" id=\"register_password\" />")
+  (pr "<a href=\"main\" id=\"register_button\">Register</button>"))

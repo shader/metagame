@@ -4,6 +4,10 @@ var userInfo = {
 }
 
 $(document).ready( function () {
+  if(userInfo.username != "" && userInfo.password != "") {
+    console.log("Username and Password loaded, don't show prompt");
+    // hide prompt
+  }
   getUsers();
 });
 
@@ -14,6 +18,13 @@ $('#login_button').live("click", function () {
   userInfo.password = $('#login_password').val();
   
   login(userInfo.username,userInfo.password);
+});
+
+$('#register_button').live("click", function () {
+  userInfo.username = $('#register_username').val();
+  userInfo.password = $('#register_password').val();
+  
+  register(userInfo.username,userInfo.password);
 });
 
 function login (username, password) {
@@ -36,7 +47,7 @@ function login (username, password) {
 function register (username, password) {
   $.ajax({
     type: "POST",
-    url: "http://127.0.0.1:8080/api-login",
+    url: "http://127.0.0.1:8080/api-register",
     data: {
       username: username,
       password: password
