@@ -6,7 +6,7 @@
 ; Define a main page. If there is no login cookie, pop out a login prompt,
 ; 
 ; Later it will display player-relavent data such owned objects
-(defopr || req "main")
+(defopr || req "index.html")
 
 (defop main req
   (doctype)

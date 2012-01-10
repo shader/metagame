@@ -21,55 +21,46 @@ $('#login_button').live("click", function () {
 });
 
 $('#register_button').live("click", function () {
-  userInfo.username = $('#register_username').val();
-  userInfo.password = $('#register_password').val();
+  userInfo.username = $('#login_username').val();
+  userInfo.password = $('#login_password').val();
   
   register(userInfo.username,userInfo.password);
 });
 
 function login (username, password) {
   $.ajax({
-    type: "GET",
     url: "http://127.0.0.1:8080/api-login",
+    dataType: 'jsonp',
     data: {
       username: username,
       password: password
     },
     success: function(data) {
-      alert("successful attempt\n"+data);
-    },
-    error: function () {
-      alert("error");
+      console.log(data);
     }
   });
 }
 
 function register (username, password) {
   $.ajax({
-    type: "POST",
     url: "http://127.0.0.1:8080/api-register",
+    dataType: 'jsonp',
     data: {
       username: username,
       password: password
     },
     success: function(data) {
-      alert("successful attempt\n"+data);
-    },
-    error: function () {
-      alert("error");
+      console.log(data);
     }
   });
 }
 
 function getUsers () {
   $.ajax({
-    type: "GET",
     url: "http://127.0.0.1:8080/api-admin-getUsers",
+    dataType: 'jsonp',
     success: function(data) {
-      alert("list: "+data);
-    },
-    error: function () {
-      alert("error");
+      console.log(data);
     }
   });
 }
