@@ -3,13 +3,17 @@
 
 (defop api-login req
   (let id (login (alref (req 'args) "username") (alref (req 'args) "password"))
-    (if id (prn "Login Success")
-      (prn "Login Failed"))))
+    (pr (alref (req 'args) "callback") "({\"success\":")
+    (if id (pr "true")
+      (pr "false"))
+    (pr "});")))
 
 (defop api-register req
   (let id (register (alref (req 'args) "username") (alref (req 'args) "password"))
-    (if id (prn "Register Success")
-      (prn "Register Failed"))))
+    (pr (alref (req 'args) "callback") "({\"success\":")
+    (if id (prn "true")
+      (prn "false"))
+    (pr "});")))
 
 (defop api-admin-getUsers req
-  (listUsers))
+  (pr (alref (req 'args) "callback") "({\"list\":\"" (listUsers) "\"});"))
