@@ -30,7 +30,7 @@ $('#register_button').live("click", function () {
 function login (username, password) {
   $.ajax({
     url: "http://127.0.0.1:8080/api-login",
-    dataType: 'jsonp',
+    dataType: 'json',
     data: {
       username: username,
       password: password
@@ -44,7 +44,7 @@ function login (username, password) {
 function register (username, password) {
   $.ajax({
     url: "http://127.0.0.1:8080/api-register",
-    dataType: 'jsonp',
+    dataType: 'json',
     data: {
       username: username,
       password: password
@@ -58,7 +58,7 @@ function register (username, password) {
 function getUsers () {
   $.ajax({
     url: "http://127.0.0.1:8080/api-admin-getUsers",
-    dataType: 'jsonp',
+    dataType: 'json',
     success: function(data) {
       console.log(data);
     }
