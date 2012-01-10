@@ -5,7 +5,12 @@
 ; registration, using the new object framework.
 (= users* (table))
 
-(deftem (user object) pw nil type 'user)
+(deftem (user object) pw nil type 'user sessionID nil)
+
+(maptable (fn (key val) 
+            (if (is val!type 'user)
+              (= (users* key) val)))
+            objects*)
 
 ; add-user
 ; creates a new user object that contains the username. Passwords
@@ -41,7 +46,8 @@
 (def login (name pass)
   (let u (find-user name)
     (if u 
-      (if (is u!pw pass) u!id
+      (if (is u!pw pass)
+        (setSessionID u!id)
         nil)
       nil)))
 
@@ -60,3 +66,9 @@
 
 (def listUsers ()
   users*)
+
+(def setSessionID (id)
+  (let sid (trunc (* (rand) (expt 10 10)))
+    (= users*.id!sessionID sid)
+    (= objects*.id!sessionID sid)))
+
