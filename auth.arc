@@ -10,7 +10,7 @@
 (maptable (fn (key val) 
             (if (is val!type 'user)
               (= (users* key) val)))
-            objects*)
+          objects*)
 
 ; add-user
 ; creates a new user object that contains the username. Passwords

@@ -2,9 +2,12 @@
 ; with GET and POST calls. 
 
 (defop api-login req
-  (let id (login (alref (req 'args) "username") (alref (req 'args) "password"))
+  (let sid (login (alref (req 'args) "username") (alref (req 'args) "password"))
     (pr "{\"success\":")
-    (if id (pr "true")
+    (if sid 
+      (do
+        (pr "true")
+        (pr ",\"sessionID\":" sid))
       (pr "false"))
     (pr "}")))
 
