@@ -57,3 +57,6 @@
 ; NOTE:  Slow
 (def find-user (name)
   (find [is _!name name] vals.users*))
+
+(def listUsers ()
+  users*)
