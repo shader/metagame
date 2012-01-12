@@ -6,14 +6,13 @@
 ; Define a main page. If there is no login cookie, pop out a login prompt,
 ; 
 ; Later it will display player-relavent data such owned objects
-(defopr || req "index.html")
+(defopr || req "main")
 
 (defop main req
   (doctype)
   (tag (html)
     (tag (head)
-      (add-js "jquery.js")
-      (add-js "knockout.js")
+      (add-js "js/jquery.js")
       (add-js "metagame.js"))
     (tag (body)
       (tag (div)
@@ -27,8 +26,7 @@
   (doctype)
   (tag (html)
     (tag (head)
-      (add-js "jquery.js")
-      (add-js "knockout.js")
+      (add-js "js/jquery.js")
       (add-js "metagame.js"))
     (tag (body)
       (tag (div)
@@ -45,13 +43,18 @@
   (tag (script src filename type "text/javascript")))
 
 (def login-prompt ()
-  (pr "<input type=\"text\" id=\"login_username\" />")
-  (pr "<input type=\"password\" id=\"login_password\" />")
-  (pr "<button id=\"login_button\">Login</button>")
-  (nbsp)
-  (link "Register" "register"))
+  (aform web-login
+    (myinput "text" "login_username")
+    (myinput "password" "login_password")
+    (but "Login" "login_button")
+    (nbsp)
+    (link "Register" "register")))
 
 (def register-prompt ()
-  (pr "<input type=\"text\" id=\"register_username\" />")
-  (pr "<input type=\"password\" id=\"register_password\" />")
-  (pr "<a href=\"main\" id=\"register_button\">Register</button>"))
+  (arform web-register
+    (myinput "text" "register_username")
+    (myinput "password" "register_password")
+    (but "Register" "register_button")))
+
+(def myinput (type name (o val "") (o size 10))
+  (gentag input type type name name value val size size))

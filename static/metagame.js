@@ -8,12 +8,38 @@ $(document).ready( function () {
     console.log("Username and Password loaded, don't show prompt");
     // hide prompt
   }
-  getUsers();
+  
+  /* Make-shift handler that converts every link into a ajax post request
+   */
+  /*
+  $('a').bind("click", function(event) {
+    event.preventDefault();
+    var url = $(this).attr("href");
+    $.post(url, function(data) {
+      alert(data);
+    });
+  });*/
+  
+  $('input[name=login_button]').bind("click", function(event) {
+    event.preventDefault();
+    var url = $('input[name=fnid]').val();
+    
+    $.ajax({
+      type: 'post',
+      url: "x?fnid="+url,
+      data: {
+        username: $('input[name=login_username]').val(),
+        password: $('input[name=login_password]').val()
+      },
+      success: function (data) {
+        console.log(data);
+      }
+    });
+  });
+        
 });
 
 $('#login_button').live("click", function () {
-  console.log("clicked login button");
-  
   userInfo.username = $('#login_username').val();
   userInfo.password = $('#login_password').val();
   

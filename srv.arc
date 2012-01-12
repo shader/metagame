@@ -1,8 +1,8 @@
 ; These following ops are URL based function calls that can be called
 ; with GET and POST calls. 
 
-(defop api-login req
-  (let sid (login (alref (req 'args) "username") (alref (req 'args) "password"))
+(def web-login (req)
+  (let sid (login (arg req "username") (arg req "password"))
     (pr "{\"success\":")
     (if sid 
       (do
@@ -11,12 +11,9 @@
       (pr "false"))
     (pr "}")))
 
-(defop api-register req
-  (let id (register (alref (req 'args) "username") (alref (req 'args) "password"))
-    (pr "{\"success\":")
-    (if id (prn "true")
-      (prn "false"))
-    (pr "}")))
+(def web-register (req)
+  (register (arg req "username") (arg req "password"))
+  (pr "main"))
 
 (defop api-admin-getUsers req
   (pr "{\"list\":\"" (listUsers) "\"}"))
