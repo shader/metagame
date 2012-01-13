@@ -2,18 +2,12 @@
 ; with GET and POST calls. 
 
 (def web-login (req)
-  (let sid (login (arg req "username") (arg req "password"))
-    (pr "{\"success\":")
-    (if sid 
-      (do
-        (pr "true")
-        (pr ",\"sessionID\":" sid))
-      (pr "false"))
-    (pr "}")))
+  (let info (login (arg req "username") (arg req "password"))
+    (pr (tostring (write-json info)))))
 
 (def web-register (req)
-  (register (arg req "username") (arg req "password"))
-  (pr "main"))
+  (let info (register (arg req "username") (arg req "password"))
+    (pr (tostring (write-json info)))))
 
 (defop api-admin-getUsers req
   (pr "{\"list\":\"" (listUsers) "\"}"))

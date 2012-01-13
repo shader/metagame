@@ -16,7 +16,7 @@
 ; creates a new user object that contains the username. Passwords
 ; and other related information should be added later.
 (def add-user (name)
-  (if (find-user name) (prn "User exists...")
+  (if (find-user name) -1
       (let u (inst 'user 'name name)
 	(= (users* u!id) u)
 	(= (objects* u!id) u)
@@ -35,8 +35,10 @@
 ; NOTE: Probably not needed.
 (def register (name pass)
   (let id (add-user name)
-    (set-pw id pass)
-    id))
+    (if (is id -1) 
+      nil
+      (do (set-pw id pass)
+          (obj "name" users*.id!name "id" id)))))
 
 ; login
 ; Function that will return a session id upon successfully
@@ -47,7 +49,7 @@
   (let u (find-user name)
     (if u 
       (if (is u!pw pass)
-        (setSessionID u!id)
+        (do (setSessionID u!id) (obj "id" u!id "sessionID" u!sessionID))
         nil)
       nil)))
 

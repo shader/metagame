@@ -36,6 +36,23 @@ $(document).ready( function () {
       }
     });
   });
+  
+  $('input[name=register_button]').bind("click", function(event) {
+    event.preventDefault();
+    var url = $('input[name=fnid]').val();
+    
+    $.ajax({
+      type: 'post',
+      url: "x?fnid="+url,
+      data: {
+        username: $('input[name=register_username]').val(),
+        password: $('input[name=register_password]').val()
+      },
+      success: function (data) {
+        console.log(data);
+      }
+    });
+  });
         
 });
 

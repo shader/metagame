@@ -30,7 +30,9 @@
       (add-js "metagame.js"))
     (tag (body)
       (tag (div)
-        (register-prompt)))))
+        (register-prompt))
+      (tag (div)
+        (link "Go back to main page" "main")))))
 
 
 ; Various HTML printing functions
@@ -51,7 +53,7 @@
     (link "Register" "register")))
 
 (def register-prompt ()
-  (arform web-register
+  (aform web-register
     (myinput "text" "register_username")
     (myinput "password" "register_password")
     (but "Register" "register_button")))
