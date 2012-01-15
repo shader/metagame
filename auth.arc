@@ -3,14 +3,7 @@
 ; use the code (that works) from the existing app.arc file
 ; as inspiration when writing the user authentication, and
 ; registration, using the new object framework.
-(= users* (table))
 
-(deftem (user object) pw nil type 'user sessionID nil)
-
-(maptable (fn (key val) 
-            (if (is val!type 'user)
-              (= (users* key) val)))
-          objects*)
 
 ; add-user
 ; creates a new user object that contains the username. Passwords
