@@ -72,7 +72,6 @@
     (let f (+ "objects/" d)
       (each f (if dir?.f dir.f)
         (let o (temload (sym:trim d 'end #\s)
-;                        (+ "objects/" + f "/" f))
                         (+ "objects/" d "/" f))
           (= (objects* o!id) o))))))
 
