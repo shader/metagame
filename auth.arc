@@ -40,11 +40,10 @@
 ; NOTE: Currently returns user ID
 (def login (name pass)
   (let u (find-user name)
-    (if u 
-      (if (is u!pw pass)
-        (do (setSessionID u!id) (obj "id" u!id "sessionID" u!sessionID))
-        nil)
-      nil)))
+    (if (and u (is u!pw pass)
+             (is u!pw pass))
+        (do (set-session-id u!id)
+            (obj "id" u!id "session-id" u!session-id)))))
 
 ; user-id
 ; gets the id based off of the user name
@@ -59,11 +58,8 @@
 (def find-user (name)
   (find [is _!name name] vals.users*))
 
-(def listUsers ()
-  users*)
-
-(def setSessionID (id)
+(def set-session-id (id)
   (let sid (trunc (* (rand) (expt 10 10)))
-    (= users*.id!sessionID sid)
-    (= objects*.id!sessionID sid)))
+    (= users*.id!session-id sid)
+    (= objects*.id!session-id sid)))
 
