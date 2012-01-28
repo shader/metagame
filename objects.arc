@@ -32,7 +32,6 @@
 (deftem (planet object) 
   type 'planet 
   system nil            ; reference to system
-  name nil              ; name of planet
   planet_type nil       ; type of planet
   size nil              ; size of planet
   location nil          ; 3D coordinates
@@ -41,7 +40,6 @@
 
 (deftem (unit object)
   type 'unit
-  name  nil             ; name of unit
   unit_type nil         ; type of unit
   location nil          ; reference to planet,system,space,etc
   health nil            ; health of unit
@@ -51,29 +49,16 @@
 
 (deftem (building object)
   type 'building
-  name nil              ; name of building
   building_type nil     ; type of building
 )
 
-
 ; Object functions
-(def save-objects ()
-  "Save all objects to their respective directories"
-  (ensure-dir "objects")
-  (each (id o) objects*
-     (let d (+ "objects/" o!type "s")
-       (ensure-dir d)
-       (save-table o (+ d "/" o!id)))))
-
 (def load-objects ()
-  "Load all objects from their respective directories"
-  (ensure-dir "objects")
-  (each d (dir "objects")
-    (let f (+ "objects/" d)
-      (each f (if dir?.f dir.f)
-        (let o (temload (sym:trim d 'end #\s)
-                        (+ "objects/" d "/" f))
-          (= (objects* o!id) o))))))
+  (each o (git-load-all)
+        (= (objects* o!id) o)))
+
+(def save-objects ()
+  (batch-save vals.objects*))
 
 (def restore-tables ()
   (maptable (fn (key val) 
