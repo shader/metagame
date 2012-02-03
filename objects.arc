@@ -11,12 +11,13 @@
   name nil
   parents nil
   children nil
-  owners nil)
+  owner nil)
 
 (deftem (user object) 
   pw nil 
   type 'user 
-  sessionID nil)
+  session-id nil
+  balance 0)
 
 ; Systems contain at least one high-mass object that
 ; other masses orbit (star, singularity, etc)
@@ -49,8 +50,9 @@
 
 (deftem (building object)
   type 'building
-  building_type nil     ; type of building
-)
+  location nil
+  status nil
+  cost 0)
 
 ; Object functions
 (def load-objects ()
