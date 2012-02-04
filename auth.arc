@@ -32,14 +32,14 @@
   (catch
     (each (k v) users* 
           (if (is v!name name)
-              throw.v))))
+              throw.v))
+    nil))
 
 (def get-user (id)
   " Get a user object by id "
-  users*!id)
+  users*.id)
 
 (def set-session-id (id)
   " Assign the user a new session-id, and return it "
   (let sid (trunc (* (rand) (expt 10 10)))
     (= users*.id!session-id sid)))
-
