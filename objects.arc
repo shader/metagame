@@ -33,15 +33,16 @@
 (deftem (planet object) 
   type 'planet 
   system nil            ; reference to system
-  planet_type nil       ; type of planet
+  planet-type nil       ; type of planet
   size nil              ; size of planet
   location nil          ; 3D coordinates
   residents nil         ; list of references to players
+  buildings nil
 )                       ; that live on the planet (may just be one)
 
 (deftem (unit object)
   type 'unit
-  unit_type nil         ; type of unit
+  unit-type nil         ; type of unit
   location nil          ; reference to planet,system,space,etc
   health nil            ; health of unit
   attack nil            ; temp placeholder (defines attack value)
